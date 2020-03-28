@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.confuture.dao.LoginUserDao">
+
+    <resultMap id="BaseResultMap" type="com.confuture.models.LoginUser">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="crt" jdbcType="TIMESTAMP" property="createdAt"/>
+    </resultMap>
+
+
+    <select id="queryLoginUserByPhone" resultType="LoginUser">
+        select * from login_user where phone = #{phone};
+    </select>
+
+    <select id="userLoginVerify" resultType="java.lang.Long">
+        select id from login_user where phone = #{phone} and password = #{password};
+    </select>
+
+    <select id="queryAllLoginUsers" resultType="LoginUser">
+        select id,phone,password,crt,updated_at from login_user;
+    </select>
+
+
+</mapper>
